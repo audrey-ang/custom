@@ -1,0 +1,17 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_mahasiswa_user","Access Mahasiswa for User Sales","model_nilai_mahasiswa","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_mahasiswa_admin","Access Mahasiswa for Admin","model_nilai_mahasiswa","sales_team.group_sale_manager",1,1,1,1
+"access_matakuliah_user","Access Mata Kuliah for User Sales","model_nilai_matakuliah","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_matakuliah_admin","Access Mata Kuliah for Admin","model_nilai_matakuliah","sales_team.group_sale_manager",1,1,1,1
+"access_khs_user","Access KHS for User Sales","model_nilai_khs","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_khs_admin","Access KHS for Admin","model_nilai_khs","sales_team.group_sale_manager",1,1,1,1
+"access_detailkhs_user","Access Detail KHS for User Sales","model_nilai_detailkhs","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_detailkhs_admin","Access Detail KHS for Admin","model_nilai_detailkhs","sales_team.group_sale_manager",1,1,1,1
+"access_kelas_user","Access Detail Kelas for User Sales","model_nilai_kelas","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_kelas_admin","Access Detail Kelas for Admin","model_nilai_kelas","sales_team.group_sale_manager",1,1,1,1
+"access_kelas_lines_user","Access Detail Kelas Lines for User Sales","model_nilai_kelas_lines","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_kelas_lines_admin","Access Detail Kelas Lines for Admin","model_nilai_kelas_lines","sales_team.group_sale_manager",1,1,1,1
+"access_wiz_nilai_kelas_user","Access Wiz Nilai Kelas for User Sales","model_wiz_nilai_kelas","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_wiz_nilai_kelas_admin","Access Wiz Nilai Kelas for Admin","model_wiz_nilai_kelas","sales_team.group_sale_manager",1,1,1,1
+"access_wiz_nilai_kelas_lines_user","Access Wiz Nilai Kelas Lines for User Sales","model_wiz_nilai_kelas_lines","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_wiz_nilai_kelas_lines_admin","Access Wiz Nilai Kelas Lines for Admin","model_wiz_nilai_kelas_lines","sales_team.group_sale_manager",1,1,1,1

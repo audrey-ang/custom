@@ -1,0 +1,128 @@
+<odoo>
+    <record id="buku_view_form" model="ir.ui.view">
+        <field name="name">buku.view.form</field>
+        <field name="model">perpus.buku</field>
+        <field name="arch" type="xml">
+            <form string="Buku Form">
+                <header>
+                    <!-- Done - Canceled - Settodraft - -->
+                    <!-- Class buku need states draft - -->
+                    <button name="action_done" string="Done" states="draft" type="object" class="btn-primary"/>
+                    <!-- Canceled need states Done - -->
+                    <button name="action_canceled" string="Cancel" states="done" type="object" class="btn-primary"/>
+                    <!-- Set to draft need states Canceled - -->
+                    <button name="action_settodraft" states="canceled" string="Set to Draft" type="object"
+                            class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="id_buku"/>
+                            <field name="name"/>
+                            <field name="harga"/>
+                            <field name="stok"/>
+                        </group>
+                        <group>
+                            <field name="pengarang"/>
+                            <field name="tahun"/>
+                            <field name="penerbit"/>
+                            <field name="harga_beli"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="buku_view_list" model="ir.ui.view">
+        <field name="name">buku.view.list</field>
+        <field name="model">perpus.buku</field>
+        <field name="arch" type="xml">
+            <tree string="Buku list">
+                <field name="id_buku"/>
+                <field name="name"/>
+                <field name="stok"/>
+                <field name="harga"/>
+                <field name="harga_beli"/>
+                <field name="pengarang"/>
+                <field name="tahun"/>
+                <field name="penerbit"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="buku_view_kanban" model="ir.ui.view">
+        <field name="name">buku.view.kanban</field>
+        <field name="model">perpus.buku</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id_buku"/>
+                <field name="name"/>
+                <field name="stok"/>
+                <field name="harga"/>
+                <field name="harga_beli"/>
+                <field name="pengarang"/>
+                <field name="tahun"/>
+                <field name="penerbit"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title oe_partner_heading">
+                                    <field name="id_buku"/>
+                                    <field name="name"/>
+                                    <field name="stok"/>
+                                </strong>
+                                <ul>
+                                    <li t-if="record.harga.raw_value">
+                                        <field name="harga"/>
+                                        <field name="harga_beli"/>
+                                    </li>
+                                    <li t-if="record.state.raw_value">
+                                        <field name="pengarang"/>
+                                        <field name="tahun"/>
+                                        <field name="penerbit"/>
+                                    </li>
+                                    <li t-if="record.state.raw_value">
+                                        <field name="state"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="buku_view_search" model="ir.ui.view">
+        <field name="name">perpus.buku.search</field>
+        <field name="model">perpus.buku</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="id_buku"/>
+                <field name="name"/>
+                <field name="state"/>
+                <filter string="Draft" name="draft_filter" domain="[('state', '=', 'draft')]"/>
+                <filter string="Done" name="confirmed_filter" domain="[('state', '=', 'done')]"/>
+
+                <group string="Group By..." expand="0" name="groupby">
+                    <filter string="State" name="by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="buku_action" model="ir.actions.act_window">
+        <field name="name">Buku</field>
+        <field name="res_model">perpus.buku</field>
+        <field name="view_id" ref="buku_view_list"/>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem id="buku_menu" parent="perpus.perpus_menu" name="Buku"
+              action="buku_action" sequence="20"/>
+</odoo>

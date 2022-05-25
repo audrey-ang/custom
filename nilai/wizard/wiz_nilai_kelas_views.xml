@@ -1,0 +1,35 @@
+<odoo>
+    <record id="wiz_kelas_view_form" model="ir.ui.view">
+        <field name="name">wiz.kelas.view.form</field>
+        <field name="model">wiz.nilai.kelas</field>
+        <field name="arch" type="xml">
+            <form string="Kelas Form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="kelas_id"/>
+                            <field name="mk_id"/>
+                            <field name="semester"/>
+                            <field name="tahun"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Nilai" name="nilai_kelas">
+                            <field name="line_ids">
+                                <tree create="0" delete="0" editable="bottom">
+                                    <field name="mhs_id" readonly="1"/>
+                                    <field name="ref_kelas_lines_id" invisible="1"/>
+                                    <field name="grade"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" data-hotkey="c"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,11 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_anggota_user","Access Anggota for User Sales","model_perpus_anggota","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_anggota_admin","Access Anggota for Admin","model_perpus_anggota","sales_team.group_sale_manager",1,1,1,1
+"access_buku_user","Access Buku for User Sales","model_perpus_buku","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_buku_admin","Access Buku for Admin","model_perpus_buku","sales_team.group_sale_manager",1,1,1,1
+"access_petugas_user","Access Petugas for User Sales","model_perpus_petugas","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_petugas_admin","Access Petugas for Admin","model_perpus_petugas","sales_team.group_sale_manager",1,1,1,1
+"access_peminjaman_user","Access Peminjaman for User Sales","model_perpus_peminjaman","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_peminjaman_admin","Access Peminjaman for Admin","model_perpus_peminjaman","sales_team.group_sale_manager",1,1,1,1
+"access_detailpeminjaman_user","Access Detail Peminjaman for User Sales","model_perpus_detailpeminjaman","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_detailpeminjaman_admin","Access Detail Peminjaman for Admin","model_perpus_detailpeminjaman","sales_team.group_sale_manager",1,1,1,1

@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_idea_user","Access Idea for User Sales","model_idea_idea","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_idea_admin","Access Idea for Admin","model_idea_idea","sales_team.group_sale_manager",1,1,1,1
+"access_voting_user","Access Voting for User Sales","model_idea_voting","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_voting_admin","Access Voting for Admin","model_idea_voting","sales_team.group_sale_manager",1,1,1,1

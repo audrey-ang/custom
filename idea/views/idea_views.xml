@@ -1,0 +1,148 @@
+<odoo>
+    <record id="idea_view_form" model="ir.ui.view">
+        <field name="name">idea.view.form</field>
+        <field name="model">idea.idea</field>
+        <field name="arch" type="xml">
+            <form string="Idea form">
+                <header>
+                    <button name="action_confirmed" string="Confirm" states="draft" type="object" class="btn-primary"/>
+                    <button name="action_settodraft" states="canceled" string="Set to Draft" type="object"
+                            class="btn-primary"/>
+                    <button name="action_done" states="confirmed" string="Approve" type="object" class="btn-primary"/>
+                    <button name="action_canceled" string="Cancel" states="confirmed,done" type="object"
+                            class="btn-primary" groups="sales_team.group_sale_manager"/>
+                    <button name="action_tes" string="Tes" type="object" class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date"/>
+                            <field name="score"/>
+                            <field name="total_yes"/>
+                            <field name="total_no"/>
+                            <field name="total_abstain"/>
+                        </group>
+                        <group>
+                            <field name="owner"/>
+                            <field name="active"/>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Votes" name="votes">
+                            <field name="voting_ids" readonly="1">
+                                <!-- <tree editable="bottom" decoration-info="vote == 'abstain'" decoration-warning="vote == 'yes'"-->
+                                <tree decoration-info="vote == 'abstain'" decoration-warning="vote == 'yes'">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="voter_id"/>
+                                    <field name="vote"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="idea_view_list" model="ir.ui.view">
+        <field name="name">idea.view.list</field>
+        <field name="model">idea.idea</field>
+        <field name="arch" type="xml">
+            <tree string="Idea list">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="score"/>
+                <field name="state"/>
+                <field name="total_yes"/>
+                <field name="total_no"/>
+                <field name="total_abstain"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="idea_view_kanban" model="ir.ui.view">
+        <field name="name">idea.view.kanban</field>
+        <field name="model">idea.idea</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="score"/>
+                <field name="total_yes"/>
+                <field name="total_no"/>
+                <field name="total_abstain"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title oe_partner_heading">
+                                    <field name="display_name"/>
+                                </strong>
+                                <ul>
+                                    <li t-if="record.date.raw_value">
+                                        <field name="date"/>
+                                    </li>
+                                    <li t-if="record.score.raw_value">
+                                        <field name="score"/>
+                                    </li>
+                                    <li t-if="record.state.raw_value">
+                                        <field name="total_yes"/>
+                                        <field name="total_no"/>
+                                        <field name="total_abstain"/>
+                                    </li>
+                                    <li t-if="record.state.raw_value">
+                                        <field name="state"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="idea_view_search" model="ir.ui.view">
+        <field name="name">idea.view.search</field>
+        <field name="model">idea.idea</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="score"/>
+                <field name="total_yes"/>
+                <field name="total_no"/>
+                <field name="total_abstain"/>
+                <filter string="Draft" name="draft_filter" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="confirmed_filter" domain="[('state', '=', 'confirmed')]"/>
+                <separator/>
+                <filter string="Score>10" name="score10_filter" domain="[('score', '>', 10)]"/>
+
+                <group string="Group By..." expand="0" name="groupby">
+                    <filter string="State" name="by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Date" name="by_date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="idea_action" model="ir.actions.act_window">
+        <field name="name">idea</field>
+        <field name="res_model">idea.idea</field>
+        <field name="view_id" ref="idea_view_list"/>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem id="exercise_menu" name="Exercise"
+              sequence="10"/>
+
+    <menuitem id="idea_mmenu" parent="idea.exercise_menu" name="Idea"
+              action="idea_action" sequence="10"/>
+    <menuitem id="idea_mmenu2" parent="idea.idea_mmenu" name="Idea2"
+              action="idea_action" sequence="10"/>
+</odoo>

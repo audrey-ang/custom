@@ -1,0 +1,77 @@
+<odoo>
+    <record id="mhs_view_form" model="ir.ui.view">
+        <field name="name">mhs.view.form</field>
+        <field name="model">nilai.mahasiswa</field>
+        <field name="arch" type="xml">
+            <form string="Mahasiswa Form">
+                <header>
+                    <!-- Done - Canceled - Settodraft - -->
+                    <!-- Class Mahasiswa need states draft - -->
+                    <button name="action_done" string="Done" states="draft" type="object" class="btn-primary"/>
+                    <!-- Canceled need states Done - -->
+                    <button name="action_canceled" string="Cancel" states="done" type="object" class="btn-primary"/>
+                    <!-- Set to draft need states Canceled - -->
+                    <button name="action_settodraft" states="canceled" string="Set to Draft" type="object"
+                            class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="nrp"/>
+                            <field name="name"/>
+                            <field name="ipk"/>
+                            <!--domain="[('state', '=', 'done')]" ~ Bisa ditambahkan disini / di voting.py -->
+                        </group>
+                        <group>
+                            <field name="status"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mhs_view_list" model="ir.ui.view">
+        <field name="name">mhs.view.list</field>
+        <field name="model">nilai.mahasiswa</field>
+        <field name="arch" type="xml">
+            <tree string="Mahasiswa list">
+                <field name="nrp"/>
+                <field name="name"/>
+                <field name="status"/>
+                <field name="ipk"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mhs_view_search" model="ir.ui.view">
+        <field name="name">nilai.mahasiswa.search</field>
+        <field name="model">nilai.mahasiswa</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="nrp"/>
+                <field name="name"/>
+                <filter string="Draft" name="draft_filter" domain="[('state', '=', 'draft')]"/>
+                <filter string="Done" name="confirmed_filter" domain="[('state', '=', 'done')]"/>
+
+                <group string="Group By..." expand="0" name="groupby">
+                    <filter string="State" name="by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="mahasiswa_action" model="ir.actions.act_window">
+        <field name="name">Mahasiswa</field>
+        <field name="res_model">nilai.mahasiswa</field>
+        <field name="view_id" ref="mhs_view_list"/>
+        <field name="view_mode">tree,list,form</field>
+    </record>
+
+    <menuitem id="nilai_menu" parent="idea.exercise_menu" name="Nilai"
+              sequence="20"/>
+    <menuitem id="mhs_menu" parent="nilai.nilai_menu" name="Mahasiswa"
+              action="mahasiswa_action" sequence="10"/>
+</odoo>

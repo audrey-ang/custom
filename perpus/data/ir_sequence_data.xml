@@ -1,0 +1,23 @@
+<odoo noupdate="0">
+    <!--    record ini hanya di-create saat diinstall-->
+    <record id="sequence_perpus_peminjaman_seq" model="ir.sequence">
+        <field name="name">Perpus Sequence</field>
+        <field name="code">perpus.peminjaman</field>
+        <field name="prefix">PERPUS/%(range_year)s</field>
+        <field eval="3" name="padding"/>
+        <field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+        <field eval="False" name="company_id"/>
+        <field eval="True" name="use_date_range"/>
+    </record>
+
+     <record id="sequence_perpus_buku_seq" model="ir.sequence">
+        <field name="name">Perpus Sequence</field>
+        <field name="code">perpus.buku</field>
+        <field name="prefix">PERPUS/</field>
+        <field eval="3" name="padding"/>
+        <field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+        <field eval="False" name="company_id"/>
+    </record>
+</odoo>
