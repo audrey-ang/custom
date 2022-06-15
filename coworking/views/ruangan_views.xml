@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<odoo>
+    <!--Form-->
+    <record id="ruangan_view_form" model="ir.ui.view">
+        <field name="name">ruangan.view.form</field>
+        <field name="model">coworking.ruangan</field>
+        <field name="arch" type="xml">
+            <form string="Ruangan Form">
+                <header>
+                    <!-- Done - Canceled - Settodraft - -->
+                    <!-- Class buku need states draft - -->
+                    <button name="action_done" string="Done" states="draft" type="object" class="btn-primary"/>
+                    <!-- Canceled need states Done - -->
+                    <button name="action_canceled" string="Cancel" states="done" type="object" class="btn-primary"/>
+                    <!-- Set to draft need states Canceled - -->
+                    <button name="action_settodraft" states="canceled" string="Set to Draft" type="object"
+                            class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done,canceled"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="ruangan_button" type="object" class="oe_stat_button" icon="fa-book"
+                                string="Ruangan">
+                            <field name="ruangan_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="nama_ruangan"/>
+                            <field name="status_ruangan"/>
+                            <field name="slot_tersedia" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                            <field name="sisa_ruangan"/>
+                        </group>
+                        <group>
+                            <field name="kapasitas"/>
+                            <label for="jam_kerja_start" string="Durasi Jam Kerja"/>
+                            <div class="o_row">
+                                <field name="jam_kerja_start"/>
+                                –
+                                <field name="jam_kerja_end"/>
+                            </div>
+                            <field name="company_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="harga"/>
+                            <field name="fasilitas"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--List-->
+    <record id="ruangan_view_list" model="ir.ui.view">
+        <field name="name">ruangan.view.list</field>
+        <field name="model">coworking.ruangan</field>
+        <field name="arch" type="xml">
+            <tree string="Ruangan list">
+                <field name="name"/>
+                <field name="nama_ruangan"/>
+                <field name="status_ruangan"/>
+                <field name="kapasitas"/>
+                <field name="jam_kerja_start"/>
+                <field name="jam_kerja_end"/>
+                <field name="fasilitas"/>
+                <field name="harga"/>
+                <field name="slot_tersedia"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Kanban-->
+    <record id="ruangan_view_kanban" model="ir.ui.view">
+        <field name="name">ruangan.view.kanban</field>
+        <field name="model">coworking.ruangan</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="nama_ruangan"/>
+                <field name="status_ruangan"/>
+                <field name="slot_tersedia"/>
+                <field name="kapasitas"/>
+                <field name="jam_kerja_start"/>
+                <field name="jam_kerja_end"/>
+                <field name="harga"/>
+                <field name="fasilitas"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title oe_partner_heading">
+                                    <field name="name"/>
+                                    <field name="nama_ruangan"/>
+                                </strong>
+                                <ul>
+                                    <li t-if="record.detail.raw_value">
+                                        <field name="kapasitas"/>
+                                        <field name="harga"/>
+                                    </li>
+                                    <li t-if="record.fasilitas.raw_value">
+                                        <field name="jam_kerja_start"/>
+                                        -
+                                        <field name="jam_kerja_start"/>
+                                        <field name="fasilitas"/>
+                                        <field name="slot_tersedia"/>
+                                        <field name="status_ruangan"/>
+                                    </li>
+                                    <li t-if="record.state.raw_value">
+                                        <field name="state"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!--Search-->
+    <record id="ruangan_view_search" model="ir.ui.view">
+        <field name="name">coworking.ruangan.search</field>
+        <field name="model">coworking.ruangan</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="nama_ruangan"/>
+                <field name="kapasitas"/>
+                <filter string="Draft" name="draft_filter" domain="[('state', '=', 'draft')]"/>
+                <filter string="Done" name="confirmed_filter" domain="[('state', '=', 'done')]"/>
+
+                <group string="Group By..." expand="0" name="groupby">
+                    <filter string="State" name="by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--Action-->
+    <record id="ruangan_action" model="ir.actions.act_window">
+        <field name="name">Ruangan</field>
+        <field name="res_model">coworking.ruangan</field>
+        <field name="view_id" ref="ruangan_view_list"/>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem id="coworking_menu" parent="idea.exercise_menu" name="Coworking Spaces"
+              sequence="40"/>
+    <menuitem id="ruangan_menu" parent="coworking.coworking_menu" name="Ruangan"
+              action="ruangan_action" sequence="10"/>
+</odoo>

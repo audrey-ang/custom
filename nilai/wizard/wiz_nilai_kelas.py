@@ -1,6 +1,5 @@
 from odoo import models, fields, api, _
 
-
 class wizkelas(models.TransientModel):
     _name = 'wiz.nilai.kelas'
     _description = 'class untuk menyimpan data kelas dan nilai'

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="res_partner_view_form_inherited" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherited</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="point"/>
+            </field>
+
+            <!-- Hide -->
+            <field name="vat" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+
+            <field name="website" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+
+             <field name="category_id" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+
+            <field name="child_ids" position="attributes">
+                <attribute name="invisible">False</attribute>
+            </field>
+
+            <!--Rename-->
+            <field name="function" position="attributes">
+                <attribute name="string">Current Job</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
+

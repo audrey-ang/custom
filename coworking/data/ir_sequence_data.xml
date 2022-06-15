@@ -1,0 +1,45 @@
+<odoo noupdate="0">
+    <!--    record ini hanya di-create saat diinstall-->
+    <record id="sequence_coworking_event_seq" model="ir.sequence">
+        <field name="name">Coworking Event Sequence</field>
+        <field name="code">coworking.event.sequence</field>
+        <field name="prefix">EVT/%(range_year)s/</field>
+        <field eval="3" name="padding"/>
+        <field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+        <field eval="False" name="company_id"/>
+        <field eval="True" name="use_date_range"/>
+    </record>
+
+    <record id="sequence_coworking_ruangan_seq" model="ir.sequence">
+        <field name="name">Coworking Ruangan Sequence</field>
+        <field name="code">coworking.ruangan.sequence</field>
+        <field name="prefix">RM/</field>
+        <field eval="3" name="padding"/>
+        <field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+        <field eval="False" name="company_id"/>
+    </record>
+
+    <record id="sequence_coworking_promo_seq" model="ir.sequence">
+        <field name="name">Coworking Promo Sequence</field>
+        <field name="code">coworking.promo.sequence</field>
+        <field name="prefix">PRM/%(range_month)s/</field>
+        <field eval="3" name="padding"/>
+        <field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+        <field eval="False" name="company_id"/>
+        <field eval="True" name="use_date_range"/>
+    </record>
+
+      <record id="sequence_coworking_transaksi_seq" model="ir.sequence">
+        <field name="name">Coworking Transaksi Sequence</field>
+        <field name="code">coworking.transaksi.sequence</field>
+        <field name="prefix">TRX/%(range_year)s/</field>
+        <field eval="3" name="padding"/>
+        <field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+        <field eval="False" name="company_id"/>
+        <field eval="True" name="use_date_range"/>
+    </record>
+</odoo>

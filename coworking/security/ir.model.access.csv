@@ -1,0 +1,19 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_ruangan_user","Access Ruangan for User Sales","model_coworking_ruangan","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_ruangan_admin","Access Ruangan for Admin","model_coworking_ruangan","sales_team.group_sale_manager",1,1,1,1
+"access_transaksi_user","Access Transaksi for User Sales","model_coworking_transaksi","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_transaksi_admin","Access Transaksi for Admin","model_coworking_transaksi","sales_team.group_sale_manager",1,1,1,1
+"access_event_user","Access Event for User Sales","model_coworking_event","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_event_admin","Access Event for Admin","model_coworking_event","sales_team.group_sale_manager",1,1,1,1
+"access_detail_ruangan_user","Access Detail Ruangan for User Sales","model_coworking_detailruangan","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_detail_ruangan_admin","Access Detail Ruangan for Admin","model_coworking_detailruangan","sales_team.group_sale_manager",1,1,1,1
+"access_detail_event_user","Access Detail Event for User Sales","model_coworking_detailevent","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_detail_event_admin","Access Detail Event for Admin","model_coworking_detailevent","sales_team.group_sale_manager",1,1,1,1
+"access_detail_promo_user","Access Detail Promo for User Sales","model_coworking_promo","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_detail_promo_admin","Access Detail Promo for Admin","model_coworking_promo","sales_team.group_sale_manager",1,1,1,1
+"access_wiz_coworking_transaksi_user","Access Wiz Coworking Transaksi for User Sales","model_wiz_coworking_transaksi","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_wiz_coworking_transaksi_admin","Access Wiz Coworking Transaksi for Admin","model_wiz_coworking_transaksi","sales_team.group_sale_manager",1,1,1,1
+"access_wiz_coworking_detailruangan_user","Access Wiz Coworking Detail Ruangan for User Sales","model_wiz_coworking_detailruangan","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_wiz_coworking_detailruangan_admin","Access Wiz Coworking Detail Ruangan for Admin","model_wiz_coworking_detailruangan","sales_team.group_sale_manager",1,1,1,1
+"access_wiz_coworking_detailevent_user","Access Wiz Coworking Detail Event for User Sales","model_wiz_coworking_detailevent","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_wiz_coworking_detailevent_admin","Access Wiz Coworking Detail Event for Admin","model_wiz_coworking_detailevent","sales_team.group_sale_manager",1,1,1,1

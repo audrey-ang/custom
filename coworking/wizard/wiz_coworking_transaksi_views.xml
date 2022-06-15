@@ -1,0 +1,47 @@
+<odoo>
+    <record id="wiz_transaksi_view_form" model="ir.ui.view">
+        <field name="name">wiz.transaksi.view.form</field>
+        <field name="model">wiz.coworking.transaksi</field>
+        <field name="arch" type="xml">
+            <form string="Transaksi Form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="transaksi_id"/>
+                            <field name="member_id"/>
+                        </group>
+                    </group>
+                    <!--Detail Ruangan-->
+                    <notebook>
+                        <page string="Detail Ruangan" name="coworking_detailruangan">
+                            <field name="detailruangan_ids">
+                                <tree create="0" delete="0" editable="bottom">
+                                    <field name="ref_detailruangan_id" invisible="1"/>
+                                    <field name="ruangan_id" readonly="1"/>
+                                    <field name="slot_tersedia"/>
+                                    <field name="unit"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <!--Detail Event-->
+                        <page string="Detail Event" name="coworking_detailevent">
+                            <field name="detailevent_ids">
+                                <tree create="0" delete="0" editable="bottom">
+                                    <field name="event_id" readonly="1"/>
+                                    <field name="ref_detailevent_id" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="harga_awal"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" data-hotkey="c"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
