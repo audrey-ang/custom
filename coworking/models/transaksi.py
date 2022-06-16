@@ -32,7 +32,7 @@ class transaksi(models.Model):
     detailevent_ids = fields.One2many('coworking.detailevent', 'transaksi_id', string='Detail Event')
 
     # Attribute ManytoOne refer to promo (promo_id)
-    promo_id = fields.Many2one('coworking.promo', string='Kode Promo', readonly=False, ondelete="cascade",
+    promo_id = fields.Many2one('coworking.promo', string='Kode Promo', readonly=True, ondelete="cascade",
                                  states={'draft': [('readonly', False)]},
                                  domain="[('state', '=', 'done')]")
 

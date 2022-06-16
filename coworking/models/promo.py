@@ -7,7 +7,7 @@ class promo(models.Model):
     _rec_name = 'nama_promo'
 
     # Attribute Fields
-    id_promo = fields.Char('ID Promo', size=64, required=True, index=True, readonly=False, default='new',
+    id_promo = fields.Char('ID Promo', size=64, required=True, index=True, readonly=True, default='new',
                            states={})
     nama_promo = fields.Char('Nama Promo', size=64, required=True, index=True, readonly=True,
                              states={'draft': [('readonly', False)]})

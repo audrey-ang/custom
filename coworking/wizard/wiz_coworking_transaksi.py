@@ -89,6 +89,9 @@ class wiz_coworking_promo(models.TransientModel):
     currency_id = fields.Many2one('res.currency', string='Currency', readonly=True,
                                   related='company_id.currency_id')
 
+    # All Constraint
+    _sql_constraints = [('check_point', 'CHECK(point>=price_promo)', "Total point tidak cukup"),]
+
     @api.model
     def default_get(self,
                     fields_list):  # ini adalah common method, semacam constructor, akan dijalankan saat create object. Ini akan meng-overwrite default_get dari parent
