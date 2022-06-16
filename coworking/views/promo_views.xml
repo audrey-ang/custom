@@ -38,6 +38,7 @@
                                        options='{"related_end_date": "date_end"}'/>
                             </div>
                             <field name="jenis_promo"/>
+                            <field name="price_promo"/>
                         </group>
                         <group>
                             <field name="disc_percentage" widget="percentage"
@@ -45,7 +46,7 @@
                             <field name="company_id" invisible="1"/>
                             <field name="currency_id" invisible="1"/>
                             <field name="min_pembelian"/>
-<!--                            <field name="max_discount"/>-->
+                            <field name="max_discount"/>
                             <field name="member_id" attrs="{'invisible': [('jenis_promo', '!=', 'reimbursment')]}"/>
                             <field name="count_promo" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
                             <field name="sisa_promo"/>

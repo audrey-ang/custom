@@ -22,6 +22,9 @@
                         <button name="action_wiz_transaksi" type="object" string="Update Unit" class="oe_stat_button"
                                 icon="fa-pencil-square-o">
                         </button>
+                         <button name="action_wiz_promo" type="object" string="Update Promo" class="oe_stat_button"
+                                icon="fa-pencil-square-o">
+                        </button>
                     </div>
                     <group>
                         <group>
@@ -55,7 +58,6 @@
                                     <field name="harga_awal"/>
                                     <field name="unit"/>
                                     <field name="harga_akhir"/>
-                                    <field name="harga_akhir_ruangan"/>
                                     <field name="date_start" widget="daterange"
                                            options='{"related_end_date": "date_end"}'/>
                                     <field name="date_end" widget="daterange"
@@ -72,7 +74,6 @@
                                     <field name="event_id"/>
                                     <field name="harga_awal"/>
                                     <field name="harga_akhir"/>
-                                    <field name="harga_akhir_event"/>
                                     <field name="date_start" widget="daterange"
                                            options='{"related_end_date": "date_end"}'/>
                                     <field name="date_end" widget="daterange"

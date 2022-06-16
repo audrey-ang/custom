@@ -7,7 +7,7 @@ class ruangan(models.Model):
     _rec_name = 'nama_ruangan'
 
     #Attribute Fields
-    name = fields.Char('ID Ruangan', size=64, required=True, index=True, readonly=False, default='new',
+    name = fields.Char('ID Ruangan', size=64, required=True, index=True, readonly=True, default='new',
                        states={})
     nama_ruangan = fields.Char('Nama Ruangan', size=64, required=True, index=True, readonly=True,
                              states={'draft': [('readonly', False)]})

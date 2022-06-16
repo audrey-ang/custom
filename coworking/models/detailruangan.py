@@ -9,12 +9,11 @@ class detailruangan(models.Model):
     name = fields.Char('ID Detail Ruangan', size=64, required=True, index=True, readonly=True, default='new',
                        states={})
     harga_akhir = fields.Monetary(string="Harga Akhir", compute='_compute_last_price', store=True)
-    harga_akhir_ruangan = fields.Monetary(string="Harga Total Ruangan", compute='_compute_last_price', store=True)
     date_start = fields.Datetime('Date Start', default=datetime.today(), readonly=True,
                                  states={'draft': [('readonly', False)]})
     date_end = fields.Datetime('Date End', default=datetime.today(), readonly=True,
                                states={'draft': [('readonly', False)]})
-    unit = fields.Integer('Unit', store=True, default=0, readonly=True)
+    unit = fields.Integer('Unit', store=True, default=1, readonly=True)
 
     state = fields.Selection([('draft', 'Draft'),
                               ('done', 'Done'),
@@ -60,9 +59,7 @@ class detailruangan(models.Model):
         for rec in self:
             val = {
                 "harga_akhir": 0.0,
-                "harga_akhir_ruangan": 0.0,
             }
             val["harga_akhir"] = (rec.harga_awal * rec.unit)
-            val["harga_akhir_ruangan"] += val["harga_akhir"]
             rec.update(val)
 

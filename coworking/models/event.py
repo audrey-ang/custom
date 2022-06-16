@@ -7,7 +7,7 @@ class event(models.Model):
     _rec_name = 'nama_event'
 
     #Attribute Fields
-    name = fields.Char('ID Event', size=64, required=True, index=True, readonly=False, default='new',
+    name = fields.Char('ID Event', size=64, required=True, index=True, readonly=True, default='new',
                        states={})
     nama_event = fields.Char('Nama Event', size=64, required=True, index=True, readonly=True,
                              states={'draft': [('readonly', False)]})

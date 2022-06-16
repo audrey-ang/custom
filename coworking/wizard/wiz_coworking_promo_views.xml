@@ -1,0 +1,26 @@
+<odoo>
+    <record id="wiz_promo_view_form" model="ir.ui.view">
+        <field name="name">wiz.promo.view.form</field>
+        <field name="model">wiz.coworking.promo</field>
+        <field name="arch" type="xml">
+            <form string="Promo Form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="transaksi_id" invisible="1"/>
+                            <field name="promo_id"/>
+                            <field name="redeem_voucher"/>
+                            <field name="point"/>
+                            <field name="price_promo"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" data-hotkey="c"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

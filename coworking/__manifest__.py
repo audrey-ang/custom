@@ -17,6 +17,7 @@
         'views/promo_views.xml',
         'views/detailruangan_views.xml',
         'wizard/wiz_coworking_transaksi_views.xml',
+        'wizard/wiz_coworking_promo_views.xml',
         'data/ir_sequence_data.xml',
     ],
     'qweb': [],  # untuk memberi tahu static file, misal CSS

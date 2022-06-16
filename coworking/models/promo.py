@@ -16,14 +16,15 @@ class promo(models.Model):
                                     ('reimbursment', 'Reimbursment'),
                                     ('lainlain', 'Lainnya')], 'Jenis Promo', readonline=True, default='discount',
                                    states={'draft': [('readonly', False)]})
-    date_start = fields.Datetime('Tanggal Event', readonly=True,
+    date_start = fields.Date('Tanggal Promo Start', readonly=True,
                                  states={'draft': [('readonly', False)]})
-    date_end = fields.Datetime('Tanggal Event', readonly=True,
+    date_end = fields.Date('Tanggal Promo End', readonly=True,
                                states={'draft': [('readonly', False)]})
     disc_percentage = fields.Float('Percentage Discount', store=True, default=0)
     min_pembelian = fields.Monetary(string="Minimum Amount", store=True)
-    # max_diskon = fields.Monetary(string="Max Amount Discount", store=True)
+    max_discount = fields.Monetary(string="Max Amount Discount", store=True)
     count_promo = fields.Integer('Initial Quantity', readonly=False, default=0)
+    price_promo = fields.Monetary(string="Price Promo", store=True)
     state = fields.Selection([('draft', 'Draft'),
                               ('done', 'Done'),
                               ('canceled', 'Canceled')], 'State', required=True, readonly=True, default='draft')
@@ -32,7 +33,7 @@ class promo(models.Model):
     transaksi_ids = fields.One2many('coworking.transaksi', 'promo_id', string='Transaksi')
 
     # Attribute ManytoOne refer to res_partner (member_id)
-    member_id = fields.Many2one('res.partner', string='By', readonly=True, ondelete="cascade",
+    member_id = fields.Many2one('res.partner', string='Member', readonly=True, ondelete="cascade",
                                 states={'draft': [('readonly', False)]})
 
     # Attribute related to currency

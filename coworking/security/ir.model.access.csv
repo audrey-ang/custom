@@ -17,3 +17,5 @@
 "access_wiz_coworking_detailruangan_admin","Access Wiz Coworking Detail Ruangan for Admin","model_wiz_coworking_detailruangan","sales_team.group_sale_manager",1,1,1,1
 "access_wiz_coworking_detailevent_user","Access Wiz Coworking Detail Event for User Sales","model_wiz_coworking_detailevent","sales_team.group_sale_salesman_all_leads",1,1,1,0
 "access_wiz_coworking_detailevent_admin","Access Wiz Coworking Detail Event for Admin","model_wiz_coworking_detailevent","sales_team.group_sale_manager",1,1,1,1
+"access_wiz_coworking_promo_user","Access Wiz Coworking Detail Promo for User Sales","model_wiz_coworking_promo","sales_team.group_sale_salesman_all_leads",1,1,1,0
+"access_wiz_coworking_promo_admin","Access Wiz Coworking Detail Promo for Admin","model_wiz_coworking_promo","sales_team.group_sale_manager",1,1,1,1

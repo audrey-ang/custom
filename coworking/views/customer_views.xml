@@ -18,7 +18,7 @@
                 <attribute name="invisible">True</attribute>
             </field>
 
-             <field name="category_id" position="attributes">
+            <field name="category_id" position="attributes">
                 <attribute name="invisible">True</attribute>
             </field>
 

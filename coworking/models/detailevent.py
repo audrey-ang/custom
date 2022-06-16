@@ -10,7 +10,6 @@ class detailevent(models.Model):
                        states={})
     harga_awal = fields.Monetary(string="Harga Awal", store=True, required=True)
     harga_akhir = fields.Monetary(string="Harga Akhir", compute='_compute_last_price', store=True)
-    harga_akhir_event = fields.Monetary(string="Harga Total Event", compute='_compute_last_price', store=True)
     state = fields.Selection([('draft', 'Draft'),
                               ('done', 'Done'),
                               ('canceled', 'Canceled')], 'State', required=True, readonly=True, default='draft')

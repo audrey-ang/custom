@@ -8,7 +8,7 @@ class transaksi(models.Model):
     #Attribute Fields
     name = fields.Char('ID Transaksi', size=64, required=True, index=True, readonly=True, default='new',
                        states={})
-    tgl_transaksi = fields.Datetime('Tanggal Transaksi', default=fields.Date.context_today, readonly=True, required=True,
+    tgl_transaksi = fields.Date('Tanggal Transaksi', default=fields.Date.context_today, readonly=True, required=True,
                                 states={'draft': [('readonly', False)]})
     status_pembayaran = fields.Selection([('paid', 'Lunas'),
                                           ('unpaid', 'Belum Lunas')],
@@ -32,7 +32,7 @@ class transaksi(models.Model):
     detailevent_ids = fields.One2many('coworking.detailevent', 'transaksi_id', string='Detail Event')
 
     # Attribute ManytoOne refer to promo (promo_id)
-    promo_id = fields.Many2one('coworking.promo', string='Kode Promo', readonly=True, ondelete="cascade",
+    promo_id = fields.Many2one('coworking.promo', string='Kode Promo', readonly=False, ondelete="cascade",
                                  states={'draft': [('readonly', False)]},
                                  domain="[('state', '=', 'done')]")
 
@@ -41,13 +41,18 @@ class transaksi(models.Model):
     category_id = fields.Many2one('product.category', string="test", related="product_id.categ_id")
     discount = fields.Float(string="Percentage Discount", related="promo_id.disc_percentage", store=True)
     min_amount = fields.Monetary(string="Minimum Amount", related="promo_id.min_pembelian")
-    tgl_promo_start = fields.Datetime('Tanggal Promo Start', related="promo_id.date_start")
-    tgl_promo_end = fields.Datetime('Tanggal Promo End', related="promo_id.date_end")
+    tgl_promo_start = fields.Date('Tanggal Promo Start', related="promo_id.date_start")
+    tgl_promo_end = fields.Date('Tanggal Promo End', related="promo_id.date_end")
     sisa_promo = fields.Integer('Quantity Promo', related="promo_id.sisa_promo")
+    max_discount = fields.Monetary('Max Discount', related="promo_id.max_discount")
 
     #Attribute yang di Compute
     biaya_total = fields.Monetary("Biaya Total", compute='_compute_amount', default=0)
     point_expected = fields.Monetary("Point Expected", compute='_compute_amount')
+
+    # Attribute temporary
+    selisih_1 = fields.Integer(string="Selisih", compute="_compute_selisih", store=True)
+    selisih_2 = fields.Integer(string="Selisih", compute="_compute_selisih", store=True)
 
     # Attribute related to currency
     company_id = fields.Many2one('res.company', string='Company',
@@ -55,17 +60,10 @@ class transaksi(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency', readonly=True,
                                   related='company_id.currency_id')
 
-    # Attribute temporary
-    #selisih_start = fields.Integer(string="Selisih", compute="_compute_selisih", store=True)
-    #selisih_end = fields.Integer(string="Selisih", compute="_compute_selisih", store=True)
-
     # All Constraint
     _sql_constraints = [('check_biaya_total', 'CHECK (biaya_total>=0)', "Total biaya can't minus"),
-                        ('selisih_start_check', 'CHECK(tgl_transaksi <= tgl_promo_start)',
-                         _('Tanggal Transaksi harus lebih besar dibanding Tanggal Promo Start')),
-                        ('selisih_end_check', 'CHECK(tgl_transaksi >= tgl_promo_end)',
-                         _('Tanggal Transaksi harus lebih kecil dibanding Tanggal Promo End')),
-                        ]
+                        ('check_tgl_transaksi_start', 'CHECK(selisih_1 > 0)', 'Tgl transaksi must be between tgl_promo_start and tgl_promo_end'),
+                        ('check_tgl_transaksi_end', 'CHECK(selisih_2 < 0)', 'Tgl transaksi must be between tgl_promo_start and tgl_promo_end'),]
 
     # Fungsi Def supaya statesnya dapat diupdate
     def action_done(self):
@@ -99,7 +97,10 @@ class transaksi(models.Model):
                 if biaya_total < rec.min_amount:
                     biaya_total = biaya_total
                 else:
-                    biaya_total = biaya_total * (1 - rec.discount)
+                    if(biaya_total * rec.discount < rec.max_discount):
+                        biaya_total = biaya_total - (biaya_total * rec.discount)
+                    else:
+                        biaya_total = biaya_total - (rec.max_discount)
                 if rec.jenis_member == "company" or rec.jenis_member == "Company":
                     point_expected = ((biaya_total / 100) * 1)
                 elif rec.jenis_member == "personal" or rec.jenis_member == "Personal":
@@ -111,17 +112,14 @@ class transaksi(models.Model):
                 'point_expected': point_expected,
             })
 
-    # @api.depends('tgl_promo_start', 'tgl_promo_end')
-    # def _compute_selisih(self):
-    #     for coworking in self:
-    #         selisih_start = selisih_end = 0
-    #         for rec in self:
-    #             selisih_start = int((rec.tgl_transaksi.days - rec.tgl_promo_start.days))
-    #             selisih_end = int((rec.tgl_transaksi - rec.tgl_promo_end).days)
-    #         coworking.update({
-    #             'selisih_start': selisih_start,
-    #             'selisih_end': selisih_end,
-    #         })
+    @api.depends('tgl_transaksi', 'tgl_promo_start', 'tgl_promo_end')
+    def _compute_selisih(self):
+        if self.tgl_promo_start and self.tgl_promo_end:
+            for rec in self:
+                selisih = int((rec.tgl_transaksi - rec.tgl_promo_start).days)
+                selisih2 = int((rec.tgl_transaksi - rec.tgl_promo_end).days)
+                rec.selisih_1 = selisih
+                rec.selisih_2 = selisih2
 
     def action_wiz_transaksi(self):
         return {

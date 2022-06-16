@@ -66,3 +66,39 @@ class detail_event_wiz(models.TransientModel):
                                      'account.budget.post'))
     currency_id = fields.Many2one('res.currency', string='Currency', readonly=True,
                                   related='company_id.currency_id')
+
+class wiz_coworking_promo(models.TransientModel):
+    _name = 'wiz.coworking.promo'
+    _description = 'Class untuk menyimpan data coworking promo'
+
+    # New Field
+    redeem_voucher = fields.Boolean('Redeem Code', default=True)
+
+    # Related field
+    transaksi_id = fields.Many2one('coworking.transaksi', string='ID Transaksi', readonly=True)
+    promo_id = fields.Many2one('coworking.promo', string='Kode Promo', readonly=False, ondelete="cascade",
+                               domain="[('state', '=', 'done')]")
+    member_id = fields.Many2one(related='transaksi_id.member_id')
+    point = fields.Monetary("Current Point", related='member_id.point')
+    price_promo = fields.Monetary(string="Price Promo", related="promo_id.price_promo")
+
+    # Attribute related to currency
+    company_id = fields.Many2one('res.company', string='Company',
+                                 default=lambda self: self.env['res.company']._company_default_get(
+                                     'account.budget.post'))
+    currency_id = fields.Many2one('res.currency', string='Currency', readonly=True,
+                                  related='company_id.currency_id')
+
+    @api.model
+    def default_get(self,
+                    fields_list):  # ini adalah common method, semacam constructor, akan dijalankan saat create object. Ini akan meng-overwrite default_get dari parent
+        res = super(wiz_coworking_promo, self).default_get(fields_list)
+        # res  merupakan dictionary beserta value yang akan diisi, yang sudah diproses di super class (untuk create record baru)
+        res['transaksi_id'] = self.env.context['active_id']
+        return res
+
+    def action_confirm(self):
+        for rec in self:
+            for coworking in self.transaksi_id:
+                coworking.promo_id = rec.promo_id
+
