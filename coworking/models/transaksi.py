@@ -33,7 +33,6 @@ class transaksi(models.Model):
 
     # Attribute ManytoOne refer to promo (promo_id)
     promo_id = fields.Many2one('coworking.promo', string='Kode Promo', readonly=True, ondelete="cascade",
-                                 states={'draft': [('readonly', False)]},
                                  domain="[('state', '=', 'done')]")
 
     # Attribute related to table lain
