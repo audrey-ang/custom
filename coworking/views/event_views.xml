@@ -83,12 +83,12 @@
                                     <field name="nama_event"/>
                                 </strong>
                                 <ul>
-                                    <li t-if="record.detail.raw_value">
+                                    <li t-if="record.name.raw_value">
                                         <field name="name"/>
                                         <field name="category_id"/>
                                         <field name="jenis_event"/>
                                     </li>
-                                    <li t-if="record.fasilitas.raw_value">
+                                    <li t-if="record.date_start.raw_value">
                                         <field name="date_start"/>
                                         <field name="date_end"/>
                                         <field name="jenis_member"/>

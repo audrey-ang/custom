@@ -126,11 +126,11 @@
                                     <field name="name"/>
                                 </strong>
                                 <ul>
-                                    <li t-if="record.detail.raw_value">
+                                    <li t-if="record.member_id.raw_value">
                                         <field name="member_id"/>
                                         <field name="jenis_member"/>
                                     </li>
-                                    <li t-if="record.fasilitas.raw_value">
+                                    <li t-if="record.tgl_transaksi.raw_value">
                                         <field name="tgl_transaksi"/>
                                         <field name="status_pembayaran"/>
                                         <field name="biaya_total"/>

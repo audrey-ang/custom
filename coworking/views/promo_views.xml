@@ -90,6 +90,8 @@
                 <field name="disc_percentage"/>
                 <field name="min_pembelian"/>
                 <field name="count_promo"/>
+                <field name="price_promo"/>
+                <field name="max_discount"/>
                 <field name="state"/>
                 <templates>
                     <t t-name="kanban-box">
@@ -99,13 +101,18 @@
                                     <field name="nama_promo"/>
                                 </strong>
                                 <ul>
-                                    <li t-if="record.detail.raw_value">
+                                    <li t-if="record.id_promo.raw_value">
                                         <field name="id_promo"/>
                                         <field name="jenis_promo"/>
                                     </li>
-                                    <li t-if="record.fasilitas.raw_value">
+                                    <li t-if="record.date_start.raw_value">
                                         <field name="date_start"/>
                                         <field name="date_end"/>
+                                    </li>
+                                     <li t-if="record.disc_percentage.raw_value">
+                                        <field name="disc_percentage"/>
+                                        <field name="price_promo"/>
+                                        <field name="max_discount"/>
                                     </li>
                                     <li t-if="record.state.raw_value">
                                         <field name="state"/>

@@ -86,6 +86,9 @@
                 <field name="jam_kerja_end"/>
                 <field name="harga"/>
                 <field name="fasilitas"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="sisa_ruangan" invisible="1"/>
+                <field name="ruangan_count" invisible="1"/>
                 <field name="state"/>
                 <templates>
                     <t t-name="kanban-box">
@@ -96,9 +99,10 @@
                                     <field name="nama_ruangan"/>
                                 </strong>
                                 <ul>
-                                    <li t-if="record.detail.raw_value">
+                                    <li t-if="record.kapasitas.raw_value">
                                         <field name="kapasitas"/>
                                         <field name="harga"/>
+                                        <field name="currency_id" invisible="1"/>
                                     </li>
                                     <li t-if="record.fasilitas.raw_value">
                                         <field name="jam_kerja_start"/>
