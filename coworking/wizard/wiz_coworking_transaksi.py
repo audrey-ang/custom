@@ -72,7 +72,7 @@ class wiz_coworking_promo(models.TransientModel):
     _description = 'Class untuk menyimpan data coworking promo'
 
     # New Field
-    redeem_voucher = fields.Boolean('Redeem Code', default=True)
+    redeem_voucher = fields.Boolean('Redeem Code', default=False)
 
     # Related field
     transaksi_id = fields.Many2one('coworking.transaksi', string='ID Transaksi', readonly=True)
